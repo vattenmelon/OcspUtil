@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>no.erlingreizer.util</groupId>
+    <artifactId>ocsp</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>ocsp</name>
+
+    <properties>
+        <version.junit>4.12</version.junit>
+        <version.maven.clean.plugin>2.5</version.maven.clean.plugin>
+        <version.maven.compiler.plugin>3.1</version.maven.compiler.plugin>
+        <version.bouncycastle>1.59</version.bouncycastle>
+        <jdk.debug>true</jdk.debug>
+        <jdk.optimize>false</jdk.optimize>
+        <jdk.source>1.8</jdk.source>
+        <jdk.target>1.8</jdk.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${version.bouncycastle}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${version.bouncycastle}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- see: http://maven.apache.org/plugins/index.html and http://mojo.codehaus.org
+                    for a complete list -->
+
+                <!-- Core plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${version.maven.clean.plugin}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.maven.compiler.plugin}</version>
+                    <configuration>
+                        <source>${jdk.source}</source>
+                        <target>${jdk.target}</target>
+                        <encoding>utf-8</encoding>
+                        <debug>${jdk.debug}</debug>
+                        <optimize>${jdk.optimize}</optimize>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
