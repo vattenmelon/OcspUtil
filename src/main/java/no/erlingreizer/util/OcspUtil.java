@@ -29,4 +29,19 @@ public class OcspUtil {
         return certificates;
 
     }
+
+    public List<X509Certificate> getCertificatesExcludingVa(byte[] rawOcspBytes) throws IOException, OCSPException, CertificateException {
+        OCSPResp resp = new OCSPResp(rawOcspBytes);
+        BasicOCSPResp rs = (BasicOCSPResp) resp.getResponseObject();
+        X509CertificateHolder[] certs = rs.getCerts();
+        List<X509CertificateHolder> x509CertificateHolders = Arrays.asList(certs);
+        List<X509Certificate> certificates = new ArrayList<>();
+        for (X509CertificateHolder x50holder : x509CertificateHolders) {
+            if (!rs.getResponderId().toASN1Primitive().getName().equals(x50holder.getSubject())) {
+                certificates.add(new X509CertImpl(x50holder.getEncoded()));
+            }
+        }
+        return certificates;
+
+    }
 }
